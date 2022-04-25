@@ -30,6 +30,25 @@ class ContenedorArchivo {
         } 
     }
 
+    async getById(id) {
+        try {
+            const data = await this.cargar();
+            return data.filter((e) => e.id == id);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async deleteById(id) {
+        try {
+            const data = await this.cargar();
+            data = data.filter((e) => e.id != id);
+            await this.guardar(data);
+        } catch(e) {
+
+        }
+    }
+
 }
 
 module.exports = ContenedorArchivo;
