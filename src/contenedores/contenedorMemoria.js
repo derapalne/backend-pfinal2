@@ -13,7 +13,7 @@ class ContenedorMemoria {
     }
 
     getById(id) {
-        return this.memoria.filter((e) => e.id == id);
+        return this.memoria.filter((e) => e.id == id)[0];
     }
 
     deleteById(id) {
