@@ -3,6 +3,8 @@ const ProductosApi = require("./apiProductos.js");
 const CarritosAPI = require("./apiCarrito");
 const express = require("express");
 const { Router } = express;
+const serviceAccount = require("./src/proyectofinal-coderhouse-firebase-adminsdk-8w9pr-0ff90cd6c8.json");
+const dbUrl = "http://proyectofinal-coderhouse.firebaseio.com";
 
 const routerProd = Router();
 const routerCart = Router();

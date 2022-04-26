@@ -64,3 +64,5 @@ class ContenedorMongoDB {
         }
     }
 }
+
+module.exports = ContenedorMongoDB;

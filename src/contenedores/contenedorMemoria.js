@@ -21,3 +21,5 @@ class ContenedorMemoria {
     }
 
 }
+
+module.exports = ContenedorMemoria;
