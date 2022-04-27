@@ -4,13 +4,12 @@ class ContenedorArchivo {
 
     constructor(fileName) {
         this.fileName = fileName;
-        this.archivo = `${__dirname}/src/${fileName}.txt`;
+        this.archivo = `${__dirname}/src/archivos/${fileName}.txt`;
     }
 
     async guardar(data) {
         try {
             console.log("Guardando en", this.fileName);
-            // console.log(JSON.stringify(data));
             await fs.promises.writeFile(this.archivo, JSON.stringify(data));
             console.log("Guardado con éxito");
         } catch (e) {
@@ -30,6 +29,7 @@ class ContenedorArchivo {
         } 
     }
 
+
     async getById(id) {
         try {
             const data = await this.cargar();
@@ -43,6 +43,15 @@ class ContenedorArchivo {
         try {
             const data = await this.cargar();
             data = data.filter((e) => e.id != id);
+            await this.guardar(data);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async deleteAll() {
+        try {
+            const data = [];
             await this.guardar(data);
         } catch(e) {
 

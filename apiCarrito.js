@@ -13,7 +13,7 @@ class CarritoAPI {
             id: CarritoAPI.carritoId++,
             timestamp: Date.now(),
             productos: [],
-        };
+        };   
         const carritos = await this.cargar().then(() => carritos.push(carrito));
         await this.guardar(carritos);
         return carrito.id;
