@@ -8,7 +8,7 @@ class ContenedorMemoria {
         this.memoria.push(datoNuevo);
     }
 
-    cargar() {
+    getAll() {
         return this.memoria;
     }
 
@@ -18,6 +18,10 @@ class ContenedorMemoria {
 
     deleteById(id) {
         this.memoria = this.memoria.filter((e) => e.is != id);
+    }
+
+    deleteAll() {
+        this.memoria = [];
     }
 
 }
