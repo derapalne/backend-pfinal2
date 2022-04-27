@@ -45,3 +45,5 @@ class ProductosDaoArchivo extends ContenedorArchivo {
         }
     }
 }
+
+module.exports = ProductosDaoArchivo;

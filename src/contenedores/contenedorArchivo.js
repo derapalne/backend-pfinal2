@@ -49,8 +49,14 @@ class ContenedorArchivo {
     async deleteById(id) {
         try {
             const data = await this.cargar();
+            const oldLenght = data.length;
             data = data.filter((e) => e.id != id);
-            await this.guardar(data);
+            if(data.length != oldLenght) {
+                await this.guardar(data);
+                console.log("Borrado con éxito");
+            } else {
+                console.log("Error al borrar elemento");
+            }
         } catch(e) {
             console.log(e);
         }

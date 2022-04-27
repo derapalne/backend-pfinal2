@@ -37,3 +37,5 @@ class ProductosDaoMemoria extends ContenedorMemoria {
     }
 
 }
+
+module.exports = ProductosDaoMemoria;
