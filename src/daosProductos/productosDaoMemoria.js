@@ -1,4 +1,5 @@
 const ContenedorMemoria = require('../contenedores/contenedorMemoria');
+const check = require("../utils/check");
 
 class ProductosDaoMemoria extends ContenedorMemoria {
 
@@ -7,7 +8,7 @@ class ProductosDaoMemoria extends ContenedorMemoria {
     }
 
     agregar(producto) {
-        if(this.check(producto)) {
+        if(check(producto)) {
             if(this.memoria.legnth) {
                 producto.id = 0;
             } else {
@@ -20,7 +21,7 @@ class ProductosDaoMemoria extends ContenedorMemoria {
     }
 
     updateById(id, producto) {
-        if(this.check(producto)) {
+        if(check(producto)) {
             for (let i = 0; i < this.memoria.length; i++) {
                 if (this.memoria[i].id == id) {
                     producto.id = id;
@@ -33,40 +34,6 @@ class ProductosDaoMemoria extends ContenedorMemoria {
         } else {
             console.log("El producto no cumple los requisitos");
         }
-    }
-
-    check(producto) {
-        if (!producto.nombre) {
-            console.log("error en  nombre");
-            return false;
-        }
-        if (!producto.descripcion) {
-            console.log("error en descripcion");
-            return false;
-        }
-        if (!producto.codigo) {
-            console.log("error en codigo");
-            return false;
-        }
-        if (!producto.precio) {
-            console.log("error en precio");
-            return false;
-        } else {
-            const precio = Number(producto.precio);
-            if (isNaN(precio)) {
-                console.log("error en precio");
-                return false;
-            }
-        }
-        if (!producto.thumbnail) {
-            console.log("error en thumbnail");
-            return false;
-        }
-        if (!producto.stock) {
-            console.log("error en stock");
-            return false;
-        }
-        return true;
     }
 
 }

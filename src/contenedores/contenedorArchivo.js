@@ -29,6 +29,13 @@ class ContenedorArchivo {
         } 
     }
 
+    async getAll() {
+        try {
+            return await this.cargar();
+        } catch(e) {
+
+        }
+    }
 
     async getById(id) {
         try {
