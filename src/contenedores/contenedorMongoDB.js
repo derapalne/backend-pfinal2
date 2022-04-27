@@ -12,7 +12,7 @@ class ContenedorMongoDB {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
-
+            data.timestamp = Date.now();
             const nuevaData = new this.Model(data);
             await nuevaData.save();
         } catch (e) {
