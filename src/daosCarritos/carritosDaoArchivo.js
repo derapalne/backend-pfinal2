@@ -33,7 +33,7 @@ class CarritosDaoArchivo extends ContenedorArchivo {
         }
     }
 
-    async borrarProducto(id, idProd) {
+    async borrarProductoById(id, idProd) {
         const carritos = await this.cargar();
         const indexCarrito = carritos.findIndex((c) => c.id == id);
         carritos[indexCarrito].productos = carritos[indexCarrito].productos.filter(

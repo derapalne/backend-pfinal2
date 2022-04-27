@@ -26,3 +26,5 @@ class CarritosDaoMemoria extends ContenedorMemoria {
         }
     }
 }
+
+module.exports = CarritosDaoMemoria;

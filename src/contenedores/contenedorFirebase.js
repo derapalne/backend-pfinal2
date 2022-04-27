@@ -11,7 +11,7 @@ class Contenedorfirebase {
               });
               console.log("Base de datos conectada:", collName)
         } catch (e) {
-
+            console.log(e);
         }
         this.collName = collName;
         this.db = admin.firestore();

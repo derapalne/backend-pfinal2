@@ -1,0 +1,11 @@
+	      PROD || Me || Ar || Mo || Fi || CART || Me || Ar || Mo || Fi || 
+cargar         ||     xx    OK    xx    xx     ||     xx    OK    xx    xx
+guardar        ||     xx    OK    xx    xx     ||     xx    OK    xx    xx
+getAll         ||     OK    OK    OK           ||     OK    OK    OK    
+getById        ||     OK    OK    OK           ||     OK    OK    OK    
+agregarProd    ||     OK    OK    OK    OK     ||           OK    
+agregarCart    ||     xx    xx    xx    xx     ||     OK    OK    OK    OK
+eliminarProd   ||     OK    OK    OK           ||           OK    
+eliminarCart   ||     xx    xx    xx    xx     ||     OK    OK    OK
+borrarAll      ||     OK    OK    OK           ||     OK    OK    OK
+updateById     ||     OK    OK    OK           ||     OK    xx    xx
