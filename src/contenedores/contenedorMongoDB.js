@@ -63,6 +63,24 @@ class ContenedorMongoDB {
             console.log(e);
         }
     }
+
+    async deleteAll() {
+        try {
+            mongoose.connect(this.uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+
+            const deletedCount = await this.Model.deleteMany({});
+            if (deletedCount.deletedCount != 0) {
+                return deletedCount;
+            } else {
+                return "No se ha podido borrar";
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 module.exports = ContenedorMongoDB;
