@@ -7,6 +7,7 @@ const ProductosDaoArchivo = require("../daosProductos/productosDaoArchivo");
 const ProductosDaoMongoDB = require("../daosProductos/productosDaoMongoDB");
 
 const config = require("./config");
+console.log(config.TIPO_DB);
 const db = config.TIPO_DB || "memoria";
 
 const uri = "mongodb://localhost:27017/pfinal2-coder";

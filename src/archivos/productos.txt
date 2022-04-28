@@ -1,0 +1,29 @@
+[
+  {
+    "nombre": "Arreglacorazones",
+    "descripcion": "Arregla un corazón, el 50% de las veces.",
+    "codigo": "AC552",
+    "stock": 2,
+    "precio": 50,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/finance-152/64/46-256.png",
+    "id": 0
+  },
+  {
+    "nombre": "Soborno",
+    "descripcion": "Funciona sin fallas, siempre y cuando no te enganchen.",
+    "codigo": "S133",
+    "stock": 15,
+    "precio": 75000,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/finance-152/64/7-256.png",
+    "id": 2
+  },
+  {
+    "nombre": "Arreglacorazones",
+    "descripcion": "Arregla un corazón, el 50% de las veces.",
+    "codigo": "AC552",
+    "stock": 2,
+    "precio": 50,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/finance-152/64/46-256.png",
+    "id": 3
+  }
+]

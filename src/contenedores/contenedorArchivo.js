@@ -4,13 +4,13 @@ class ContenedorArchivo {
 
     constructor(fileName) {
         this.fileName = fileName;
-        this.archivo = `${__dirname}/src/archivos/${fileName}.txt`;
+        this.archivo = `./src/archivos/${this.fileName}.txt`;
     }
 
     async guardar(data) {
         try {
             console.log("Guardando en", this.fileName);
-            await fs.promises.writeFile(this.archivo, JSON.stringify(data));
+            await fs.promises.writeFile(this.archivo, JSON.stringify(data, null, 2));
             console.log("Guardado con éxito");
         } catch (e) {
             console.log(`Error guardando datos en ${this.fileName}`, e);
@@ -40,7 +40,12 @@ class ContenedorArchivo {
     async getById(id) {
         try {
             const data = await this.cargar();
-            return data.filter((e) => e.id == id);
+            const elemento = await data.filter((e) => e.id == id)[0];
+            if(elemento != undefined) {
+                return await elemento;
+            } else {
+                return {error: "Elemento no encontrado"};
+            }
         } catch(e) {
             console.log(e);
         }
@@ -48,14 +53,16 @@ class ContenedorArchivo {
 
     async deleteById(id) {
         try {
-            const data = await this.cargar();
+            let data = await this.cargar();
             const oldLenght = data.length;
             data = data.filter((e) => e.id != id);
             if(data.length != oldLenght) {
                 await this.guardar(data);
                 console.log("Borrado con éxito");
+                return id;
             } else {
-                console.log("Error al borrar elemento");
+                console.log("Error al borrar elemento", id);
+                return "Id inexistente"
             }
         } catch(e) {
             console.log(e);
@@ -66,8 +73,9 @@ class ContenedorArchivo {
         try {
             const data = [];
             await this.guardar(data);
+            return "Ok";
         } catch(e) {
-
+            console.log(e);
         }
     }
 

@@ -95,7 +95,7 @@ routerCart.get("/:id/productos", async (req, res) => {
     const id = req.params.id;
     const carrito = await carritosDao.getById(id);
     if (carrito) {
-        res.status(200).json(await carrito.getProdsById());
+        res.status(200).json(await carrito.productos);
     } else {
         res.status(404).json({ error: "Carrito inexistente" });
     }

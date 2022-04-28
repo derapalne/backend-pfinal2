@@ -3,20 +3,21 @@ const check = require("../utils/check");
 
 class ProductosDaoArchivo extends ContenedorArchivo {
     constructor() {
-        super({ fileName: "productos" });
+        super("productos");
     }
 
     async agregar(producto) {
         if (check(producto)) {
             try {
                 const productos = await this.cargar();
-                if (this.productos.legnth) {
+                if (productos.length == 0) {
                     producto.id = 0;
                 } else {
-                    producto.id = this.memoria[this.memoria.length - 1].id + 1;
+                    producto.id = productos[productos.length - 1].id + 1;
                 }
                 productos.push(producto);
                 await this.guardar(productos);
+                return producto.id;
             } catch (e) {
                 console.log(e);
             }
