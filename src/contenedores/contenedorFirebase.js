@@ -1,7 +1,7 @@
 const admin = require("firebase-admin");
 
 
-class Contenedorfirebase {
+class ContenedorFirebase {
 
     constructor(serviceAccount, dbUrl, collName) {
         try {
@@ -27,17 +27,27 @@ class Contenedorfirebase {
         }
     }
 
-    async getAll() {
-
-    }
-
     async getById(id) {
         try {
             let doc = this.query.doc(`${id}`);
-            
+            const item = await doc.get();
+            const response = await item.data();
+            return response;
         } catch(e) {
             console.log(e);
         }
     }
 
+    async deleteById(id) {
+        try {
+            const doc = this.query.doc(`${id}`);
+            const response = await doc.delete();
+            return response;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 }
+
+module.exports = ContenedorFirebase;
