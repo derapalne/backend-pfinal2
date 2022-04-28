@@ -5,9 +5,12 @@ class ContenedorMemoria {
     }
 
     guardar(datoNuevo) {
-        if(this.memoria.legnth) {
+        console.log( this.memoria.length );
+        if(this.memoria.length == 0) {
             datoNuevo.id = 0;
+            console.log("hola funionando bien");
         } else {
+            console.log("hola funcionando raro");
             datoNuevo.id = this.memoria[this.memoria.length-1].id + 1;
         }
         datoNuevo.timestamp = Date.now();

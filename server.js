@@ -20,14 +20,15 @@ app.use("/api/carrito", routerCart);
 // ADMIN CHECK
 
 const isAdmin = (req, res, next) => {
-    let admin = false;
+    let admin = true;
     if (admin) {
         next();
+    } else {
+        res.status(203).json({
+            error: -1,
+            descripcion: `Ruta ${req.url} Método ${req.method} no autorizado`,
+        });
     }
-    res.status(203).json({
-        error: -1,
-        descripcion: `Ruta ${req.url} Método ${req.method} no autorizado`,
-    });
 };
 
 
@@ -52,9 +53,7 @@ routerProd.get("/:id?", async (req, res) => {
 // Para incorporar productos al listado
 // ADMIN
 routerProd.post("/", isAdmin, async (req, res) => {
-    console.log("post");
-    const admin = req.body.admin;
-
+    const producto = req.body.producto;
     const prodId = await productosDao.agregar(producto);
     res.status(201).json(prodId);
 });
@@ -65,7 +64,7 @@ routerProd.put("/:id", isAdmin, async (req, res) => {
     const admin = req.body.admin;
     const id = req.params.id;
     const producto = req.body.producto;
-    const prodId = await productosDao.setProductoById(id, producto);
+    const prodId = await productosDao.updateById(id, producto);
     res.status(201).json(prodId);
 });
 
@@ -74,8 +73,7 @@ routerProd.put("/:id", isAdmin, async (req, res) => {
 routerProd.delete("/:id", isAdmin, async (req, res) => {
     const admin = req.body.admin;
     const id = req.params.id;
-
-    const prodId = await productosDao.deleteProductoById(id);
+    const prodId = await productosDao.deleteById(id);
     res.status(200).json(prodId);
 });
 
@@ -83,21 +81,21 @@ routerProd.delete("/:id", isAdmin, async (req, res) => {
 
 // Crea un carrito y devuelve su ID
 routerCart.post("/", async (req, res) => {
-    res.status(201).json(await carritosDao.agregar());
+    res.status(201).json(await carritosDao.agregarCart());
 });
 
 // Vacía un carrito y lo elimina
 routerCart.delete("/:id", async (req, res) => {
     const id = req.params.id;
-    res.status(200).json(await carritosDao.borrarCarrito(id));
+    res.status(200).json(await carritosDao.deleteById(id));
 });
 
 // Me permite listar todos los productos guardados en el carrito
 routerCart.get("/:id/productos", async (req, res) => {
     const id = req.params.id;
-    const carrito = await carritosDao.getCarritoById(id);
+    const carrito = await carritosDao.getById(id);
     if (carrito) {
-        res.status(200).json(carrito.getAll());
+        res.status(200).json(await carrito.getProdsById());
     } else {
         res.status(404).json({ error: "Carrito inexistente" });
     }
@@ -107,11 +105,11 @@ routerCart.get("/:id/productos", async (req, res) => {
 routerCart.post("/:id/productos", async (req, res) => {
     const idCart = req.params.id;
     const idProd = req.body.idProd;
-    const producto = await productosDao.getProductoById(idProd);
+    const producto = await productosDao.getById(idProd);
     if (producto.error) {
         res.status(204).json(producto);
     } else {
-        const carritoReturn = await carritosDao.agregarProducto(idCart, producto);
+        const carritoReturn = await carritosDao.agregarProd(idCart, producto);
         if (carritoReturn) {
             res.status(204).json(carritoReturn);
         } else {
@@ -124,7 +122,7 @@ routerCart.post("/:id/productos", async (req, res) => {
 routerCart.delete("/:id/productos/:id_prod", (req, res) => {
     const idCart = req.params.id;
     const idProd = req.params.id_prod;
-    carritosDao.borrarProducto(idCart, idProd);
+    carritosDao.deleteProdById(idCart, idProd);
     res.status(200).json({ mensaje: "El producto fue borrado" });
 });
 

@@ -1,4 +1,5 @@
 const ContenedorMemoria = require("../contenedores/contenedorMemoria");
+const check = require("../utils/check");
 
 class CarritosDaoMemoria extends ContenedorMemoria {
     constructor() {
@@ -30,6 +31,11 @@ class CarritosDaoMemoria extends ContenedorMemoria {
         this.memoria[indexCarrito].productos = this.memoria[indexCarrito].productos.filter(
             (e) => e.id != idProd
         );
+    }
+
+    getProdsById(id) {
+        const indexCarrito = this.memoria.findIndex((c) => c.id == id);
+        return this.memoria[indexCarrito].productos;
     }
 }
 
