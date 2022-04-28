@@ -6,7 +6,8 @@ const ProductosDaoMemoria = require("../daosProductos/productosDaoMemoria");
 const ProductosDaoArchivo = require("../daosProductos/productosDaoArchivo");
 const ProductosDaoMongoDB = require("../daosProductos/productosDaoMongoDB");
 
-const db = PROCESS.ENV.TIPO_DB || "memoria";
+const config = require("./config");
+const db = config.TIPO_DB || "memoria";
 
 const uri = "mongodb://localhost:27017/pfinal2-coder";
 

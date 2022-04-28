@@ -1,4 +1,4 @@
-const config = require("./config");
+const config = require("./src/utils/config");
 const express = require("express");
 const { Router } = express;
 const selector = require("./src/utils/selector")
@@ -16,6 +16,20 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/productos", routerProd);
 app.use("/api/carrito", routerCart);
+
+// ADMIN CHECK
+
+const isAdmin = (req, res, next) => {
+    let admin = false;
+    if (admin) {
+        next();
+    }
+    res.status(203).json({
+        error: -1,
+        descripcion: `Ruta ${req.url} Método ${req.method} no autorizado`,
+    });
+};
+
 
 // ---------------------------------------------- ROUTER PRODUCTOS ----------------------//
 
@@ -123,18 +137,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-// ADMIN CHECK
-
-const isAdmin = (req, res, next) => {
-    let admin = false;
-    if (admin) {
-        next();
-    }
-    res.status(203).json({
-        error: -1,
-        descripcion: `Ruta ${req.url} Método ${req.method} no autorizado`,
-    });
-};
 
 // PRUEBAS
 

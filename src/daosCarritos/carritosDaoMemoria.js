@@ -1,7 +1,9 @@
 const ContenedorMemoria = require("../contenedores/contenedorMemoria");
 
 class CarritosDaoMemoria extends ContenedorMemoria {
-    constructor() {}
+    constructor() {
+        super();
+    }
 
     agregarCart() {
         const carrito = {

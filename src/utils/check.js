@@ -32,4 +32,4 @@ const check = (producto) => {
         return true;
     }
 
-module.exports = check();
+module.exports = check;

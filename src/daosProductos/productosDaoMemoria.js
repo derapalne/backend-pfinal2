@@ -4,7 +4,7 @@ const check = require("../utils/check");
 class ProductosDaoMemoria extends ContenedorMemoria {
 
     constructor() {
-
+        super();
     }
 
     agregar(producto) {
