@@ -63,3 +63,5 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
     }
     
 }
+
+module.exports = CarritosDaoMongoDB;

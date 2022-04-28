@@ -38,3 +38,5 @@ class ProductosDaoMongoDB extends ContenedorMongoDB {
         }
     }
 }
+
+module.exports = ProductosDaoMongoDB;
