@@ -9,12 +9,7 @@ class ProductosDaoMemoria extends ContenedorMemoria {
 
     agregar(producto) {
         if(check(producto)) {
-            if(this.memoria.legnth) {
-                producto.id = 0;
-            } else {
-                producto.id = this.memoria[this.memoria.length-1].id + 1;
-            }
-            super.guardar(producto);
+            return super.guardar(producto);
         } else {
             console.log("El producto no cumple los requisitos");
         }

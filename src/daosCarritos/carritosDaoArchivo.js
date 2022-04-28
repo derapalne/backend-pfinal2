@@ -22,7 +22,7 @@ class CarritosDaoArchivo extends ContenedorArchivo {
         return carrito.id;
     }
 
-    async agregarProducto(id, producto) {
+    async agregarProd(id, producto) {
         if (check(producto)) {
             const carritos = this.cargar();
             const indexCarrito = carritos.findIndex((c) => c.id == id);
@@ -37,7 +37,7 @@ class CarritosDaoArchivo extends ContenedorArchivo {
         }
     }
 
-    async borrarProductoById(id, idProd) {
+    async deleteProdById(id, idProd) {
         const carritos = await this.cargar();
         const indexCarrito = carritos.findIndex((c) => c.id == id);
         carritos[indexCarrito].productos = carritos[indexCarrito].productos.filter(

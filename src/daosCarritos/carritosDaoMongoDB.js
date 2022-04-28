@@ -19,11 +19,11 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
             const carrito = {productos: []};
             return this.guardar(carrito);
         } catch(e) {
-
+            console.log(e);
         }
     }
 
-    async agregarProducto(id, producto) {
+    async agregarProd(id, producto) {
         if(check(producto)) {
             try {
                 mongoose.connect(this.uri, {
@@ -46,7 +46,7 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
         }
     }
 
-    async borrarProductoById(id, idProd) {
+    async deleteProdById(id, idProd) {
         if(check(producto)) {
             try {
                 mongoose.connect(this.uri, {

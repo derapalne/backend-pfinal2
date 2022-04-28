@@ -3,21 +3,14 @@ const ContenedorMemoria = require("../contenedores/contenedorMemoria");
 class CarritosDaoMemoria extends ContenedorMemoria {
     constructor() {}
 
-    nuevoCarrito() {
-        let id = 0;
-        if (this.memoria.length) {
-            id = this.memoria[this.memoria.length - 1].id + 1;
-        }
+    agregarCart() {
         const carrito = {
-            id: id,
-            timestamp: Date.now(),
             productos: [],
         };
-        this.memoria.push(carrito);
-        return carrito.id;
+        return this.guardar(carrito);
     }
 
-    agregarProducto(idCart, producto) {
+    agregarProd(idCart, producto) {
         if (check(producto)) {
             const indexCarrito = this.memoria.findIndex((c) => c.id == idCart);
             if (indexCarrito != -1) {
