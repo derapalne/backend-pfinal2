@@ -6,8 +6,7 @@ const check = require("../utils/check")
 class CarritosDaoMongoDB extends ContenedorMongoDB {
 
     constructor(uri) {
-        this.Model = Carritos;
-        super(uri, this.Model);
+        super(uri, Carritos);
     }
 
     async agregarCart() {
@@ -42,7 +41,7 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
                 console.log(e);
             }
         } else {
-            console.log("El producto no cumple los requisitos");
+            return "El producto no cumple los requisitos"
         }
     }
 
@@ -71,7 +70,7 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
                 console.log(e);
             }
         } else {
-            console.log("El producto no cumple los requisitos");
+            return "El producto no cumple los requisitos"
         }
     }
     

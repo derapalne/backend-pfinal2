@@ -1,11 +1,11 @@
 	      PROD || Me || Ar || Mo || Fi || CART || Me || Ar || Mo || Fi || 
-cargar         ||     xx    OK    xx    xx     ||     xx    OK    xx    xx
+cargar         ||     xx    OK    xx    xx     ||     xx    OK    xx    xx     agregar
 guardar        ||     xx    OK    xx    xx     ||     xx    OK    xx    xx
-getAll         ||     OK    OK    OK           ||     OK    OK    OK    
-getById        ||     OK    OK    OK           ||     OK    OK    OK    
-agregarProd    ||     OK    OK    OK    OK     ||     OK    OK    OK
-agregarCart    ||     xx    xx    xx    xx     ||     OK    OK    OK    OK
-eliminarProd   ||     OK    OK    OK           ||     OK    OK    OK
+getAll         ||     OK    OK    OK           ||     OK    OK    OK           getAll
+getById        ||     OK    OK    OK           ||     OK    OK    OK           getById
+agregarProd    ||     OK    OK    OK    OK     ||     OK    OK    OK           agregarProd
+agregarCart    ||     xx    xx    xx    xx     ||     OK    OK    OK    OK     agregarCart
+eliminarProd   ||     OK    OK    OK           ||     OK    OK    OK           deleteById // deleteProdById
 eliminarCart   ||     xx    xx    xx    xx     ||     OK    OK    OK
 borrarAll      ||     OK    OK    OK           ||     OK    OK    OK
 updateById     ||     OK    OK    OK           ||     OK    xx    xx

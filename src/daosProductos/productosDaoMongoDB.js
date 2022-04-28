@@ -5,8 +5,7 @@ const Productos = require("../models/productos");
 
 class ProductosDaoMongoDB extends ContenedorMongoDB {
     constructor(uri) {
-        this.Model = Productos;
-        super(uri), this.Model;
+        super(uri, Productos);
     }
 
     async agregar(producto) {

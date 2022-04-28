@@ -12,8 +12,12 @@ class ContenedorMongoDB {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
-            const largestId = await this.Model.find().sort({id: -1}).limit(1);
-            data.id = largestId++;
+            const largestId = await this.Model.find({},{_id: 0, id: 1}).sort({id: -1}).limit(1);
+            if(largestId[0]) {
+                data.id = largestId[0].id + 1;
+            } else {
+                data.id = 0;
+            }
             data.timestamp = Date.now();
             const nuevaData = new this.Model(data);
             await nuevaData.save();
@@ -30,7 +34,7 @@ class ContenedorMongoDB {
                 useUnifiedTopology: true,
             });
 
-            return await this.Model.find({}, { _id: 0, _v: 0 });
+            return await this.Model.find({}, { _id: 0, __v: 0 });
         } catch (e) {
             console.log(e);
         }
@@ -42,8 +46,13 @@ class ContenedorMongoDB {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
-
-            return await this.Model.find({ id: id }, { _id: 0, _v: 0 });
+            const respuesta = await this.Model.find({ id: id }, { _id: 0, __v: 0 });
+            if(respuesta[0]) {
+                return respuesta[0];
+            } else {
+                return {error: "Elemento no encontrado"};
+            }
+             
         } catch (e) {
             console.log(e);
         }
