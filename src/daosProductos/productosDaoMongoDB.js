@@ -9,6 +9,16 @@ class ProductosDaoMongoDB extends ContenedorMongoDB {
         super(uri), this.Model;
     }
 
+    async agregar(producto) {
+        if(check(producto)) {
+            try {
+               return await this.guardar(producto);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+    }
+
     async updateById(id, producto) {
         if (check(producto)) {
             try {

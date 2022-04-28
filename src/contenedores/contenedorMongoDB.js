@@ -17,6 +17,7 @@ class ContenedorMongoDB {
             data.timestamp = Date.now();
             const nuevaData = new this.Model(data);
             await nuevaData.save();
+            return data.id;
         } catch (e) {
             console.log(e);
         }

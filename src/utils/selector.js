@@ -10,6 +10,9 @@ const db = PROCESS.ENV.TIPO_DB || "memoria";
 
 const uri = "mongodb://localhost:27017/pfinal2-coder";
 
+const serviceAccount = require("../db/proyectofinal-coderhouse-firebase-adminsdk-8w9pr-0ff90cd6c8.json");
+const dbUrl = "http://proyectofinal-coderhouse.firebaseio.com";
+
 let productosDao;
 let carritosDao;
 

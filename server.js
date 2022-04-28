@@ -1,16 +1,13 @@
 const config = require("./config");
-const ProductosApi = require("./apiProductos.js");
-const CarritosAPI = require("./apiCarrito");
 const express = require("express");
 const { Router } = express;
-const serviceAccount = require("./src/proyectofinal-coderhouse-firebase-adminsdk-8w9pr-0ff90cd6c8.json");
-const dbUrl = "http://proyectofinal-coderhouse.firebaseio.com";
+const selector = require("./src/utils/selector")
 
 const routerProd = Router();
 const routerCart = Router();
 const app = express();
-const productosApi = new ProductosApi();
-const carritosApi = new CarritosAPI();
+const productosDao = selector.productosDao;
+const carritosDao = selector.carritosDao;
 
 const PORT = config.PORT;
 
@@ -27,9 +24,9 @@ app.use("/api/carrito", routerCart);
 routerProd.get("/:id?", async (req, res) => {
     const id = req.params.id;
     if (isNaN(id)) {
-        res.status(200).json(await productosApi.getAll());
+        res.status(200).json(await productosDao.getAll());
     } else {
-        const respuesta = await productosApi.getProductoById(id);
+        const respuesta = await productosDao.getById(id);
         if (respuesta.error) {
             res.status(204).json(respuesta);
         } else {
@@ -44,7 +41,7 @@ routerProd.post("/", isAdmin, async (req, res) => {
     console.log("post");
     const admin = req.body.admin;
 
-    const prodId = await productosApi.addProducto(producto);
+    const prodId = await productosDao.agregar(producto);
     res.status(201).json(prodId);
 });
 
@@ -54,7 +51,7 @@ routerProd.put("/:id", isAdmin, async (req, res) => {
     const admin = req.body.admin;
     const id = req.params.id;
     const producto = req.body.producto;
-    const prodId = await productosApi.setProductoById(id, producto);
+    const prodId = await productosDao.setProductoById(id, producto);
     res.status(201).json(prodId);
 });
 
@@ -64,7 +61,7 @@ routerProd.delete("/:id", isAdmin, async (req, res) => {
     const admin = req.body.admin;
     const id = req.params.id;
 
-    const prodId = await productosApi.deleteProductoById(id);
+    const prodId = await productosDao.deleteProductoById(id);
     res.status(200).json(prodId);
 });
 
@@ -72,19 +69,19 @@ routerProd.delete("/:id", isAdmin, async (req, res) => {
 
 // Crea un carrito y devuelve su ID
 routerCart.post("/", async (req, res) => {
-    res.status(201).json(await carritosApi.crearCarrito());
+    res.status(201).json(await carritosDao.agregar());
 });
 
 // Vacía un carrito y lo elimina
 routerCart.delete("/:id", async (req, res) => {
     const id = req.params.id;
-    res.status(200).json(await carritosApi.borrarCarrito(id));
+    res.status(200).json(await carritosDao.borrarCarrito(id));
 });
 
 // Me permite listar todos los productos guardados en el carrito
 routerCart.get("/:id/productos", async (req, res) => {
     const id = req.params.id;
-    const carrito = await carritosApi.getCarritoById(id);
+    const carrito = await carritosDao.getCarritoById(id);
     if (carrito) {
         res.status(200).json(carrito.getAll());
     } else {
@@ -96,11 +93,11 @@ routerCart.get("/:id/productos", async (req, res) => {
 routerCart.post("/:id/productos", async (req, res) => {
     const idCart = req.params.id;
     const idProd = req.body.idProd;
-    const producto = await productosApi.getProductoById(idProd);
+    const producto = await productosDao.getProductoById(idProd);
     if (producto.error) {
         res.status(204).json(producto);
     } else {
-        const carritoReturn = await carritosApi.agregarProducto(idCart, producto);
+        const carritoReturn = await carritosDao.agregarProducto(idCart, producto);
         if (carritoReturn) {
             res.status(204).json(carritoReturn);
         } else {
@@ -113,7 +110,7 @@ routerCart.post("/:id/productos", async (req, res) => {
 routerCart.delete("/:id/productos/:id_prod", (req, res) => {
     const idCart = req.params.id;
     const idProd = req.params.id_prod;
-    carritosApi.borrarProducto(idCart, idProd);
+    carritosDao.borrarProducto(idCart, idProd);
     res.status(200).json({ mensaje: "El producto fue borrado" });
 });
 

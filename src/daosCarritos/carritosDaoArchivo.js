@@ -6,7 +6,7 @@ class CarritosDaoArchivo extends ContenedorArchivo {
         super({ fileName: "carritos" });
     }
 
-    async agregarCarrito() {
+    async agregarCart() {
         const carritos = await this.cargar();
         let id = 0;
         if (carritos.length) {

@@ -10,6 +10,19 @@ class CarritosDaoMongoDB extends ContenedorMongoDB {
         super(uri, this.Model);
     }
 
+    async agregarCart() {
+        try {
+            mongoose.connect(this.uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            const carrito = {productos: []};
+            return this.guardar(carrito);
+        } catch(e) {
+
+        }
+    }
+
     async agregarProducto(id, producto) {
         if(check(producto)) {
             try {
