@@ -12,6 +12,8 @@ class ContenedorMongoDB {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
+            const largestId = await this.Model.find().sort({id: -1}).limit(1);
+            data.id = largestId++;
             data.timestamp = Date.now();
             const nuevaData = new this.Model(data);
             await nuevaData.save();
