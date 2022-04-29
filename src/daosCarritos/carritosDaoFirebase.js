@@ -73,3 +73,5 @@ class CarritosDaoFirebase extends ContenedorFirebase {
         }
     }
 }
+
+module.exports = CarritosDaoFirebase;
