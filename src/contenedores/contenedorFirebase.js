@@ -5,17 +5,17 @@ class ContenedorFirebase {
 
     constructor(serviceAccount, dbUrl, collName) {
         try {
-            admin.initializeApp({
+             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount),
                 databaseURL: dbUrl
-              });
-              console.log("Base de datos conectada:", collName)
+              }, collName);
+              console.log("Base de datos conectada:", collName);
+              this.collName = collName;
+              this.db = admin.firestore();
+              this.query = this.db.collection(collName);
         } catch (e) {
             console.log(e);
         }
-        this.collName = collName;
-        this.db = admin.firestore();
-        this.query = db.collection(collName);
     }
 
     async guardar(data) {
@@ -31,7 +31,7 @@ class ContenedorFirebase {
         try {
             let doc = this.query.doc(`${id}`);
             const item = await doc.get();
-            const response = await item.data();
+            const response = item.data();
             return response;
         } catch(e) {
             console.log(e);

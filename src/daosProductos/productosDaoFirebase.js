@@ -52,14 +52,14 @@ class ProductosDaoFirebase extends ContenedorFirebase {
             const querySnapshot = await this.query.get();
             const docs = querySnapshot.docs;
             const response = docs.map((doc) => ({
-                id: doc.id,
-                timestamp: doc.timestamp,
-                nombre: doc.nombre,
-                descripcion: doc.descripcion,
-                thumbnail: doc.thumbnail,
-                precio: doc.precio,
-                codigo: doc.codigo,
-                stock: doc.stock,
+                id: doc.data().id,
+                timestamp: doc.data().timestamp,
+                nombre: doc.data().nombre,
+                descripcion: doc.data().descripcion,
+                thumbnail: doc.data().thumbnail,
+                precio: doc.data().precio,
+                codigo: doc.data().codigo,
+                stock: doc.data().stock,
             }));
             console.log(response);
             return response;
